@@ -7,7 +7,7 @@ function Header() {
     <header>
       <h1>
         <ToysIcon />
-        Saper
+        SAPER (SAve paPER)
       </h1>
     </header>
   );
