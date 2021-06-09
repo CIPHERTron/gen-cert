@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
-
+// This is a comment. Fixed a Bug.
 function App() {
   const [notes, setNotes] = useState([]);
 
@@ -28,6 +28,7 @@ function App() {
       {notes.map((noteItem, index) => {
         return (
           <Note
+            
             key={index}
             id={index}
             title={noteItem.title}
