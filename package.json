@@ -1,7 +1,7 @@
 {
-  "name": "pritishsamal.com",
+  "name": "instadevs",
   "private": true,
-  "description": "Pritish Samal's portfolio",
+  "description": "the type of instagram where open-source devs celebrate their contributions",
   "version": "1.0.0",
   "author": "CIPHERTron",
   "scripts": {
