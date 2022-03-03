@@ -60,7 +60,7 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#444444" />
 
           {/* add your own app-icon */}
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="/favicon.ico" />
           <link rel="manifest" href="/manifest.json" />
         </Head>
         <body>
