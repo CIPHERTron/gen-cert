@@ -38,12 +38,16 @@ const navigations: NavItemProps[] = [
     label: "Docs",
   },
   {
-    href: "/",
+    href: "/posts",
     label: "Posts",
   },
   {
-    href: "/",
+    href: "/dashboard",
     label: "Dashboard",
+  },
+  {
+    href: "/auth",
+    label: "Register",
   },
 ];
 

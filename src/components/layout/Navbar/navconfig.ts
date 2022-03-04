@@ -8,15 +8,15 @@ export const navigations = [
     label: "Docs",
   },
   {
-    href: "/",
+    href: "/posts",
     label: "Posts",
   },
   {
-    href: "/",
+    href: "/dashboard",
     label: "Dashboard",
   },
   {
-    href: "/",
-    label: "Contributions",
+    href: "/auth",
+    label: "Register",
   },
 ];
