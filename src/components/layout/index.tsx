@@ -15,12 +15,12 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const isMobileView = useMediaQuery("(max-width: 700px)");
-  const backgroundColor = useColorModeValue("gray.50", "gray.800");
+  // const backgroundColor = useColorModeValue("cyan.100", "gray.800");
   const textColor = useColorModeValue("gray.900", "gray.200");
 
   return (
     <Box
-      backgroundColor={backgroundColor}
+      // backgroundColor={backgroundColor}
       color={textColor}
       minHeight="100vh"
       pt={24}
