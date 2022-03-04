@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import {
   onAuthStateChanged,
@@ -10,19 +11,18 @@ import type { FC } from "react";
 import { useState, useEffect, createContext } from "react";
 
 import { auth } from "config/firebase";
-import type { ChildrenPropsInterface } from "types";
 
 const authContextDefaultValues = {
   user: false,
-  signup: () => {},
-  login: () => {},
+  signup: (email: string, password: string) => {},
+  login: (email: string, password: string) => {},
   logout: () => {},
   uid: "",
 };
 
 export const AuthContext = createContext(authContextDefaultValues);
 
-export const AuthProvider: FC<ChildrenPropsInterface> = ({ children }) => {
+export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("");
 
