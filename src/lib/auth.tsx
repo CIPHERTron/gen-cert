@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
@@ -5,9 +6,11 @@ import {
   signOut,
 } from "firebase/auth";
 import { useRouter } from "next/router";
+import type { FC } from "react";
 import { useState, useEffect, createContext } from "react";
 
 import { auth } from "config/firebase";
+import type { ChildrenPropsInterface } from "types";
 
 const authContextDefaultValues = {
   user: false,
@@ -19,7 +22,7 @@ const authContextDefaultValues = {
 
 export const AuthContext = createContext(authContextDefaultValues);
 
-export function AuthProvider({ children }) {
+export const AuthProvider: FC<ChildrenPropsInterface> = ({ children }) => {
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("");
 
@@ -71,7 +74,7 @@ export function AuthProvider({ children }) {
         router.push("/");
         console.log("Sign out success");
       })
-      .catch(() => console.log("Sign out error"));
+      .catch(() => console.error("Sign out error"));
   };
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -80,8 +83,8 @@ export function AuthProvider({ children }) {
     signup,
     login,
     logout,
-    userId,
+    uid: userId,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
+};

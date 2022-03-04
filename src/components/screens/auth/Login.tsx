@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
   Button,
@@ -16,6 +18,7 @@ import styled from "@emotion/styled";
 import { doc, setDoc } from "firebase/firestore";
 import { useContext, useState } from "react";
 
+import type { LoginProps, SignupProps } from "../../../types";
 import { db } from "config/firebase";
 import { AuthContext } from "lib/auth";
 
@@ -31,7 +34,7 @@ const Wrapper = styled(Box)`
   align-items: center;
 `;
 
-const SignupComponent = ({ signup }) => {
+const SignupComponent = ({ signup }: SignupProps) => {
   const [ghUsername, setGhUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -86,7 +89,7 @@ const SignupComponent = ({ signup }) => {
   );
 };
 
-const LoginComponent = ({ login }) => {
+const LoginComponent = ({ login }: LoginProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -118,7 +121,7 @@ const LoginComponent = ({ login }) => {
 };
 
 function Login() {
-  const { login, logout, signup } = useContext(AuthContext);
+  const { login, signup } = useContext(AuthContext);
   const { colorMode } = useColorMode();
   return (
     <Container
