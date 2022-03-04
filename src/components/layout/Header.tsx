@@ -15,7 +15,8 @@ import { AuthContext } from "lib/auth";
 import Navigation from "./Navigation";
 import ThemeToggle from "./ThemeToggle";
 
-const Logout = ({ logout }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Logout = ({ logout }: any) => {
   return (
     <Box>
       <Tooltip label="Logout">
@@ -32,7 +33,7 @@ const Logout = ({ logout }) => {
 
 const Header = () => {
   const { colorMode } = useColorMode();
-  const { logout, user } = useContext(AuthContext);
+  const { logout, uid } = useContext(AuthContext);
 
   return (
     <Box
@@ -67,7 +68,7 @@ const Header = () => {
         <Navigation />
 
         <div style={{ display: "flex" }}>
-          {user && <Logout logout={logout} />}
+          {uid !== "" && <Logout logout={logout} />}
           <ThemeToggle />
         </div>
       </Flex>
