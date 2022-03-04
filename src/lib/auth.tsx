@@ -6,11 +6,12 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import type { FC } from "react";
 import { useState, useEffect, createContext } from "react";
 
-import { auth } from "config/firebase";
+import { auth, db } from "config/firebase";
 
 const authContextDefaultValues = {
   user: false,
@@ -18,6 +19,8 @@ const authContextDefaultValues = {
   login: (email: string, password: string) => {},
   logout: () => {},
   uid: "",
+  email: "",
+  username: "",
 };
 
 export const AuthContext = createContext(authContextDefaultValues);
@@ -25,15 +28,19 @@ export const AuthContext = createContext(authContextDefaultValues);
 export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("");
+  const [useremail, setUserEmail] = useState("");
 
   const router = useRouter();
 
   useEffect(() => {
     onAuthStateChanged(auth, (usr) => {
       if (usr) {
-        const { uid } = usr;
-        console.log(uid);
+        const { uid, email } = usr;
+        console.log(usr.email);
         setUserId(uid);
+        if (email !== null) {
+          setUserEmail(email);
+        }
       } else {
         console.log("No User");
       }
@@ -84,6 +91,8 @@ export const AuthProvider: FC = ({ children }) => {
     login,
     logout,
     uid: userId,
+    email: useremail,
+    username: "",
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
