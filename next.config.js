@@ -14,9 +14,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 // media-src 'none';
 // connect-src *;
 // font-src 'self';
+// frame-src giscus.app;
 
 const ContentSecurityPolicy = `
-  frame-src giscus.app;
 `;
 
 /**
