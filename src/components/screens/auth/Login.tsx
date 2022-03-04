@@ -128,7 +128,7 @@ function Login() {
       borderRadius="xl"
       borderColor={colorMode === "dark" ? "#fbc4ab" : "#000"}
     >
-      <Tabs isFitted variant="enclosed">
+      <Tabs isFitted variant="enclosed-colored">
         <TabList mb="1em">
           <Tab>Sign-Up</Tab>
           <Tab>Login</Tab>
