@@ -13,7 +13,3 @@ export interface ValueInterface {
   logout: () => void;
   uid: string;
 }
-
-export interface ChildrenPropsInterface {
-  children: React.ReactNode;
-}
