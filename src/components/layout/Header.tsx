@@ -1,11 +1,38 @@
-import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Tooltip,
+  IconButton,
+  useColorMode,
+} from "@chakra-ui/react";
 import Link from "next/link";
+import { useContext } from "react";
+import { FaSignOutAlt } from "react-icons/fa";
+
+import { AuthContext } from "lib/auth";
 
 import Navigation from "./Navigation";
 import ThemeToggle from "./ThemeToggle";
 
+const Logout = ({ logout }) => {
+  return (
+    <Box>
+      <Tooltip label="Logout">
+        <IconButton
+          aria-label="logout of instadevs"
+          icon={<FaSignOutAlt />}
+          onClick={logout}
+          backgroundColor="transparent"
+        />
+      </Tooltip>
+    </Box>
+  );
+};
+
 const Header = () => {
   const { colorMode } = useColorMode();
+  const { logout, user } = useContext(AuthContext);
 
   return (
     <Box
@@ -13,9 +40,7 @@ const Header = () => {
       top={0}
       zIndex={5}
       backgroundColor={
-        colorMode === "light"
-          ? "rgba(247, 250, 252, 0.8)"
-          : "rgba(26, 32, 44, 0.8)"
+        colorMode === "light" ? "rgba(247, 250, 252, 0.8)" : "#03071e"
       }
       layerStyle="blur-bg"
       width="full"
@@ -41,7 +66,10 @@ const Header = () => {
 
         <Navigation />
 
-        <ThemeToggle />
+        <div style={{ display: "flex" }}>
+          {user && <Logout logout={logout} />}
+          <ThemeToggle />
+        </div>
       </Flex>
     </Box>
   );
