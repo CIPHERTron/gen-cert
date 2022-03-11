@@ -16,7 +16,7 @@ import { auth, db } from "config/firebase";
 const authContextDefaultValues = {
   user: false,
   signup: (email: string, password: string) => {},
-  login: (email: string, password: string) => {},
+  login: (username: string, email: string, password: string) => {},
   logout: () => {},
   uid: "",
   email: "",
@@ -29,6 +29,7 @@ export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("");
   const [useremail, setUserEmail] = useState("");
+  const [ghuser, setGhuser] = useState("");
 
   const router = useRouter();
 
@@ -61,12 +62,14 @@ export const AuthProvider: FC = ({ children }) => {
       });
   };
 
-  const login = (email: string, password: string) => {
+  const login = (username: string, email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const { user: signinUser } = userCredential;
         console.log("signin success", signinUser);
         setUser(true);
+        setGhuser(username);
+        localStorage.setItem("githubUsername", username);
         router.push("/");
       })
       .catch((err) => {
@@ -78,6 +81,7 @@ export const AuthProvider: FC = ({ children }) => {
   const logout = () => {
     signOut(auth)
       .then(() => {
+        localStorage.clear();
         router.push("/");
         console.log("Sign out success");
       })
@@ -92,7 +96,7 @@ export const AuthProvider: FC = ({ children }) => {
     logout,
     uid: userId,
     email: useremail,
-    username: "",
+    username: ghuser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

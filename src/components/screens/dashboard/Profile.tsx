@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+
 import {
   Box,
   Image,
@@ -9,11 +12,10 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import { query, collection, getDocs } from "firebase/firestore";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 
-import { db } from "config/firebase";
-import { AuthContext } from "lib/auth";
+// import { octokit } from "config/octokit";
+import { octokit } from "config/octokit";
 
 const ProfileContainer = styled(Box)`
   margin: 0 auto;
@@ -38,26 +40,21 @@ const ProfileContainer = styled(Box)`
 
 const Profile = () => {
   const { colorMode } = useColorMode();
-  const value = useContext(AuthContext);
-  const [username, setUsername] = useState("");
+  const [data, setData] = useState({});
+  const [error, setError] = useState({});
 
   useEffect(() => {
-    const fetchusername = async () => {
-      const q = query(collection(db, "registeredUsers"));
-      const querySnapshot = await getDocs(q);
-
-      querySnapshot.forEach((doc) => {
-        if (doc.data().email === value.email) {
-          setUsername(doc.data().githubUsername);
-        }
-      });
-    };
-    fetchusername();
-  }, [value.email]);
+    const username = localStorage.getItem("githubUsername");
+    async function fetchData() {
+      return octokit.rest.users.getByUsername({ username });
+    }
+    const response = fetchData();
+    response.then((r) => setData(r.data)).catch((err) => setError(err));
+  }, []);
 
   return (
     <ProfileContainer>
-      {username === null ? (
+      {data === {} && !error ? (
         <Spinner
           thickness="4px"
           speed="0.65s"
@@ -79,7 +76,7 @@ const Profile = () => {
             bgColor={colorMode === "dark" ? "#03045e" : "#ade8f4"}
             borderColor={colorMode === "dark" ? "#ade8f4" : "#03045e"}
           >
-            <Heading fontWeight="extrabold">{`Username: ${username}`}</Heading>
+            <Heading fontWeight="extrabold">{`Username: ${data?.login}`}</Heading>
             <Flex>
               <Text mr={5} fontSize="xl" fontWeight="bold">
                 Followers: 100
