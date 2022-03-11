@@ -3,7 +3,7 @@ export type SignupProps = {
 };
 
 export type LoginProps = {
-  login: (email: string, password: string) => void;
+  login: (username: string, email: string, password: string) => void;
 };
 
 export interface ValueInterface {
