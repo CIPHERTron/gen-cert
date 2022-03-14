@@ -28,6 +28,7 @@
     "@nivo/calendar": "^0.79.1",
     "@nivo/core": "^0.79.0",
     "@octokit/rest": "^18.12.0",
+    "@octokit/types": "^6.34.0",
     "axios": "^0.26.0",
     "chakra-ui-markdown-renderer": "^3.0.1",
     "cors": "^2.8.5",
