@@ -1,5 +1,8 @@
 import { Flex, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+
+import { AuthContext } from "../../lib/auth";
 
 type NavItemProps = {
   href: string;
@@ -42,21 +45,19 @@ const navigations: NavItemProps[] = [
     label: "Posts",
   },
   {
-    href: "/dashboard",
-    label: "Dashboard",
-  },
-  {
     href: "/auth",
     label: "Register",
   },
 ];
 
 const Navigation = () => {
+  const { email } = useContext(AuthContext);
   return (
     <Flex display={["none", "none", "flex"]}>
       {navigations.map((navigation) => (
         <NavItem {...navigation} key={navigation.label} />
       ))}
+      {email && <NavItem key="dashboard" href="/dashboard" label="Dashboard" />}
     </Flex>
   );
 };

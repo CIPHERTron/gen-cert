@@ -82,7 +82,7 @@ export const AuthProvider: FC = ({ children }) => {
     signOut(auth)
       .then(() => {
         localStorage.clear();
-        router.push("/");
+        router.reload();
         console.log("Sign out success");
       })
       .catch(() => console.error("Sign out error"));
