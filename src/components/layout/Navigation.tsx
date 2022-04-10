@@ -44,10 +44,6 @@ const navigations: NavItemProps[] = [
     href: "/posts",
     label: "Posts",
   },
-  {
-    href: "/auth",
-    label: "Register",
-  },
 ];
 
 const Navigation = () => {
@@ -58,6 +54,7 @@ const Navigation = () => {
         <NavItem {...navigation} key={navigation.label} />
       ))}
       {email && <NavItem key="dashboard" href="/dashboard" label="Dashboard" />}
+      {!email && <NavItem key="register" href="/auth" label="Register" />}
     </Flex>
   );
 };
