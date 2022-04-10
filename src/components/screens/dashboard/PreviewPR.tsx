@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import {
   Box,
   Heading,
@@ -17,7 +20,8 @@ const Wrapper = styled(Box)`
   border-radius: 8px;
 `;
 
-const PreviewPR = ({ url, title, desc, base, head }: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const PreviewPR = ({ url, title, base, head }: any) => {
   const { colorMode } = useColorMode();
 
   return (
