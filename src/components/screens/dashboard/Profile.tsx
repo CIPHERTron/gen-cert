@@ -8,7 +8,6 @@ import {
   Heading,
   Flex,
   Text,
-  Spinner,
   Badge,
   Button,
   Link,
@@ -18,6 +17,7 @@ import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 import { FaTwitter, FaExternalLinkAlt } from "react-icons/fa";
 
+import Preloader from "components/shared/Preloader";
 import { octokit } from "config/octokit";
 
 const ProfileContainer = styled(Box)`
@@ -63,13 +63,7 @@ const Profile = () => {
   return (
     <ProfileContainer>
       {data?.login === undefined || !error ? (
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="cyan.100"
-          size="xl"
-        />
+        <Preloader />
       ) : (
         <Box
           className="profile-grid"
