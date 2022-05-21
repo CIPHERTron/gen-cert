@@ -26,7 +26,7 @@ const Wrapper = styled(Box)`
 const SearchBar = () => {
   const [repo, setRepo] = useState("");
   const [pr, setPr] = useState([]);
-  // const [fetchClick, setFetchClick] = useState(false);
+  const [fetchClick, setFetchClick] = useState(false);
 
   const fetchPulls = () => {
     const repoDetails = repo.split("/");
@@ -66,22 +66,24 @@ const SearchBar = () => {
           Fetch
         </Button>
       </HStack>
-      <Stack mt={10} spacing={3}>
-        {!pr.length ? (
-          <Preloader />
-        ) : (
-          pr.map((item) => (
-            <PreviewPR
-              key={item.title}
-              url={item.html_url}
-              title={item.title}
-              desc={item.body}
-              base={item.base.ref}
-              head={item.head.ref}
-            />
-          ))
-        )}
-      </Stack>
+      {fetchClick && (
+        <Stack mt={10} spacing={3}>
+          {!pr.length ? (
+            <Preloader />
+          ) : (
+            pr.map((item) => (
+              <PreviewPR
+                key={item.title}
+                url={item.html_url}
+                title={item.title}
+                desc={item.body}
+                base={item.base.ref}
+                head={item.head.ref}
+              />
+            ))
+          )}
+        </Stack>
+      )}
     </Wrapper>
   );
 };
