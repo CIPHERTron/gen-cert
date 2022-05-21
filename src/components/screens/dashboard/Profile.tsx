@@ -62,7 +62,7 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
-      {data === {} || !error ? (
+      {data?.login === undefined || !error ? (
         <Spinner
           thickness="4px"
           speed="0.65s"
@@ -81,6 +81,7 @@ const Profile = () => {
               className="profile-image"
               src={data?.avatar_url}
               boxSize="310px"
+              objectFit="cover"
             />
           </Stack>
           <Box className="profile-info">
