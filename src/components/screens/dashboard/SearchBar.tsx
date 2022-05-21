@@ -14,6 +14,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
+import Preloader from "components/shared/Preloader";
 import { octokit } from "config/octokit";
 
 import PreviewPR from "./PreviewPR";
@@ -25,6 +26,7 @@ const Wrapper = styled(Box)`
 const SearchBar = () => {
   const [repo, setRepo] = useState("");
   const [pr, setPr] = useState([]);
+  // const [fetchClick, setFetchClick] = useState(false);
 
   const fetchPulls = () => {
     const repoDetails = repo.split("/");
@@ -35,13 +37,16 @@ const SearchBar = () => {
     pulls
       .then((res) => {
         console.log(res.data);
-        const arr = res.data.filter((item) => item.user?.login === "tengqm");
+        const arr = res.data.filter((item) => item.user?.login === "JohnTitor");
         console.log(arr);
         setPr(arr);
+        setFetchClick(true);
       })
       // .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
+
+  // const showLoader = fetchClick && !pr.length;
 
   return (
     <Wrapper>
@@ -62,16 +67,20 @@ const SearchBar = () => {
         </Button>
       </HStack>
       <Stack mt={10} spacing={3}>
-        {pr.map((item) => (
-          <PreviewPR
-            key={item.title}
-            url={item.html_url}
-            title={item.title}
-            desc={item.body}
-            base={item.base.ref}
-            head={item.head.ref}
-          />
-        ))}
+        {!pr.length ? (
+          <Preloader />
+        ) : (
+          pr.map((item) => (
+            <PreviewPR
+              key={item.title}
+              url={item.html_url}
+              title={item.title}
+              desc={item.body}
+              base={item.base.ref}
+              head={item.head.ref}
+            />
+          ))
+        )}
       </Stack>
     </Wrapper>
   );
